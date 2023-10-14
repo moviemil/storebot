@@ -1,7 +1,7 @@
 <?php
 $token = '6661652395:AAHfT1yL4QePWkUJ5_Z6GyTTse5-TQ9oPlk';
 $apiUrl = "https://api.telegram.org/bot$token";
-$appUrl = 'https://fmlcoringa.000webhostapp.com/index.php';
+$appUrl = 'https://storebot.vercel.app/api/index.php';
 
 function setWebhook() {
   global $apiUrl, $appUrl;
