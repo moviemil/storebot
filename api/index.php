@@ -1,33 +1,10 @@
 <?php
-$token = '6661652395:AAHfT1yL4QePWkUJ5_Z6GyTTse5-TQ9oPlk';
+$token = '6484719892:AAEpIPKCVVxY8t55Pr-T5RxEBbIGnWPQvN8';
 $apiUrl = "https://api.telegram.org/bot$token";
-$appUrl = 'https://storebot.vercel.app/api';
-
-function setWebhook() {
-  global $apiUrl, $appUrl;
-  $url = $apiUrl . '/setWebhook?url=' . $appUrl;
-  $res = file_get_contents($url);
-  echo $res;
-}
-
-function checkWebhookStatus() {
-  $webhookInfo = getWebhookInfo();
-  $statusMessage = $webhookInfo ? "Webhook está ativo" : "Webhook não está configurado";
-  return $statusMessage;
-}
-
-function getWebhookInfo() {
-  global $apiUrl;
-  $url = $apiUrl . '/getWebhookInfo';
-  $response = file_get_contents($url);
-  $data = json_decode($response, true);
-  return $data['ok'] ? $data['result'] : null;
-}
+$spreadsheetId = '1ygOrIsULzQ_kqcHOrE9fQy02aif4Q44Q_G_FXmkqZFQ';
+$sheetName = 'Dados';
 
 function getDataFromSheet() {
-  // Substitua 'ID_DA_SUA_PLANILHA' pelo ID da sua planilha do Google Sheets
-  $spreadsheetId = '1ygOrIsULzQ_kqcHOrE9fQy02aif4Q44Q_G_FXmkqZFQ';
-  $sheetName = 'Dados';
   $data = file_get_contents("https://docs.google.com/spreadsheets/u/1/d/$spreadsheetId/gviz/tq?tqx=out:csv&sheet=$sheetName");
   $lines = explode(PHP_EOL, $data);
   $header = str_getcsv(array_shift($lines));
@@ -116,4 +93,3 @@ function joinGroup($groupLink, $chatId) {
 
   return $response;
 }
-setWebhook();
